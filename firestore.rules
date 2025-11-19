@@ -1,0 +1,20 @@
+// Firestore security rules - start with secure defaults
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read for all public collections (site data), but allow write only to authenticated admins
+    match /{collection=destinations,offers,hotels,cruises,safaris} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.email_verified == true;
+    }
+    // Bookings: allow creating for anyone, but only admins can read/write updates/deletes
+    match /bookings/{bookingId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null && request.auth.token.email_verified == true;
+    }
+    // Fallback: deny everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

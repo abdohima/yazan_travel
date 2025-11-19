@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="database.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Yazan Travel - يزن ترافل | رحلات وسياحة وحجوزات</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="music" preload="auto" playsinline>
+	<source src="https://files.catbox.moe/7kkyxn.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+	const audio = document.getElementById("music");
+
+	function playMusic() {
+	  audio.play().catch(() => {});
+	  // إزالة الأحداث بعد التشغيل
+	  document.removeEventListener("click", playMusic);
+	  document.removeEventListener("touchstart", playMusic);
+	}
+
+	// تشغيل عند لمس أو الضغط في أي مكان
+	document.addEventListener("click", playMusic, { once: true });
+	document.addEventListener("touchstart", playMusic, { once: true });
+  </script>
+
+
+	<div class="cursor" id="cursor"></div>
+	<canvas id="particlesCanvas"></canvas>
+
+	<header>
+		<div class="logo">
+			<img src="https://h.top4top.io/p_3606dstyp0.png" alt="Yazan Travel Logo">
+			<h1>Hurghdawi <span>🌊🪸</span></h1>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="#" data-lang-key="home">الرئيسية</a></li>
+				<li><a href="https://wa.me/201273426669" data-lang-key="flights">رحلات الطيران</a></li>
+				<li><a href="https://wa.me/201273426669" data-lang-key="hotels">حجز الفنادق</a></li>
+				<li><a href="https://wa.me/201273426669" data-lang-key="packages">الباقات السياحية</a></li>
+				<li><a href="https://wa.me/201273426669" data-lang-key="contact">اتصل بنا</a></li>
+			</ul>
+		</nav>
+		<div class="user-actions">
+			<div class="lang-switcher">
+				<button class="lang-btn active" data-lang="ar">العربية</button>
+				<button class="lang-btn" data-lang="en">English</button>
+				<button class="lang-btn" data-lang="ru">Русский</button>
+				<button class="lang-btn" data-lang="de">Deutsch</button>
+			</div>
+			<a href="#" class="admin-icon" id="adminIcon">
+				<i class="fas fa-cog"></i>
+			</a>
+			<div class="mode-toggle" id="modeToggle">🌙</div>
+		</div>
+	</header>
+
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="container">
+			<h1 data-lang-key="heroTitle">استمتع بأفضل عروض السفر والسياحة</h1>
+			<p data-lang-key="heroDesc">اكتشف العالم مع يزن ترافل - نقدم لك أفضل العروض على تذاكر الطيران، الفنادق، والباقات السياحية</p>
+			<a href="#destinations" class="btn" data-lang-key="exploreOffers">استكشف العروض</a>
+		</div>
+	</section>
+
+	<!-- Destinations Section -->
+	<section class="section" id="destinations">
+		<div class="container">
+			<h2 class="section-title" data-lang-key="popularDestinations">الفنادق  السياحيه</h2>
+			<div class="destinations-grid" id="destinationsGrid">
+				<!-- سيتم تحميل البيانات ديناميكيًا -->
+			</div>
+		</div>
+	</section>
+
+	<!-- Special Offers Section -->
+	<section class="section" style="background: rgba(0,0,0,0.5);">
+		<div class="container">
+			<h2 class="section-title" data-lang-key="specialOffers">عروض خاصة</h2>
+			<div class="offers-slider" id="offersSlider">
+				<!-- سيتم تحميل البيانات ديناميكيًا -->
+			</div>
+		</div>
+	</section>
+
+	<!-- Services Section -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section-title" data-lang-key="ourServices">خدماتنا</h2>
+			<div class="services-grid">
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-plane"></i>
+					</div>
+					<h3 data-lang-key="flightBooking">  احجز افضل الفنادق معانا</h3>
+					<p data-lang-key="flightDesc">أفضل العروض على حجز  الفنادق  الدولية والمحلية</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-hotel"></i>
+					</div>
+					<h3 data-lang-key="hotelBooking"> حجز فنادق بالغردقه وشرم الشيخ</h3>
+					<p data-lang-key="hotelDesc">آلاف الفنادق حول العالم بأفضل الأسعار</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-ship"></i>
+					</div>
+					<h3 data-lang-key="cruises">رحلات بحرية</h3>
+					<p data-lang-key="cruisesDesc">رحلات بحرية فاخرة إلى أجمل الجزر والوجهات</p>
+				</div>
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-tree"></i>
+					</div>
+					<h3 data-lang-key="safari">رحلات سفاري</h3>
+					<p data-lang-key="safariDesc">تجارب سفاري فريدة في البراري والصحاري</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-column">
+					<h3 data-lang-key="company">يزن ترافل</h3>
+					<p data-lang-key="companyDesc">شركة رائدة في مجال السياحة والسفر، نقدم خدمات متكاملة تشمل حجز تذاكر الطيران، الفنادق، الباقات السياحية، رحلات بحر وسفاري وترنسفير وحجز سهرات ليليه ثقه لا تنتهي.</p>
+				</div>
+				<div class="footer-column">
+					<h3 data-lang-key="quickLinks">روابط سريعة</h3>
+					<ul class="footer-links">
+						<li><a href="https://wa.me/201273426669" data-lang-key="home">الرئيسية</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="about">عن الشركة</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="flights">الرحلات الجوية</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="hotels">حجز الفنادق</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="packages">الباقات السياحية</a></li>
+					</ul>
+				</div>
+				<div class="footer-column">
+					<h3 data-lang-key="ourServices">خدماتنا</h3>
+					<ul class="footer-links">
+						<li><a href="https://wa.me/201273426669" data-lang-key="flightBooking">تذاكر الطيران</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="hotelBooking">حجز الفنادق</a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="packages"> رحلات بحر </a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="visas">رحلات سفاري </a></li>
+						<li><a href="https://wa.me/201273426669" data-lang-key="carRental"> حجز سهرات ديسكو</a></li>
+					</ul>
+				</div>
+				<div class="footer-column">
+					<h3 data-lang-key="contactUs">اتصل بنا</h3>
+					<ul class="footer-links">
+						<li><i class="fas fa-map-marker-alt"></i> <span data-lang-key="address">الغردقه حي الكوثر شارع12 بجوار حي البنوك مصر</span></li>
+						<li><i class="fas fa-phone"></i> 01273426669</li>
+						<li><i class="fas fa-envelope"></i> info@yazantravel.com</li>
+					</ul>
+				</div>
+			</div>
+			<div class="social-links">
+				<a href="https://wa.me/201273426669" id="whatsappLink" target="_blank"><i class="fab fa-whatsapp"></i></a>
+				<a href="https://www.instagram.com/yazan_taravel11?igsh=MTg3ODFscmYydmd3eg%3D%3D&utm_source=qr"><i class="fab fa-facebook"></i></a>
+				<a href="https://www.instagram.com/yazan_taravel11?igsh=MTg3ODFscmYydmd3eg%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+				<a href="https://www.instagram.com/yazan_taravel11?igsh=MTg3ODFscmYydmd3eg%3D%3D&utm_source=qr"><i class="fab fa-twitter"></i></a>
+			</div>
+			<div class="footer-bottom">
+				<p data-lang-key="copyright">جميع الحقوق محفوظة &copy; 2026 يزن ترافل</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Booking Modal -->
+	<div class="modal" id="bookingModal">
+		<div class="modal-content">
+			<button class="modal-close" id="closeBookingModal">&times;</button>
+			<h2 class="modal-title" data-lang-key="bookTrip">حجز رحلة</h2>
+			<form id="bookingForm">
+				<div class="form-group">
+					<label for="bookingName" data-lang-key="fullName">الاسم الكامل</label>
+					<input type="text" id="bookingName" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="bookingEmail" data-lang-key="email">البريد الإلكتروني</label>
+					<input type="email" id="bookingEmail" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="bookingPhone" data-lang-key="phone">رقم الهاتف</label>
+					<input type="tel" id="bookingPhone" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="bookingDate" data-lang-key="travelDate">تاريخ السفر</label>
+					<input type="date" id="bookingDate" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="bookingTravelers" data-lang-key="travelersCount">عدد المسافرين</label>
+					<input type="number" id="bookingTravelers" class="form-control" min="1" required>
+				</div>
+				<div class="form-group">
+					<label for="bookingType" data-lang-key="tripType">نوع الرحلة</label>
+					<input type="text" id="bookingType" class="form-control" readonly>
+				</div>
+				<div class="form-group">
+					<label for="bookingPrice" data-lang-key="price">السعر</label>
+					<input type="text" id="bookingPrice" class="form-control" readonly>
+				</div>
+				<button type="submit" class="btn btn-accent" style="width: 100%;" data-lang-key="bookNow">احجز الآن</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Payment Modal -->
+	<div class="modal" id="paymentModal">
+		<div class="modal-content">
+			<button class="modal-close" id="closePaymentModal">&times;</button>
+			<h2 class="modal-title" data-lang-key="payment">الدفع عبر InstaPay</h2>
+			<div class="payment-section">
+				<h3 data-lang-key="paymentInstructions">تعليمات الدفع</h3>
+				<p data-lang-key="paymentDesc">لإتمام عملية الدفع، يرجى تحويل المبلغ إلى الحساب التالي:</p>
+				<div class="instapay-info">
+					<p class="instapay-account">abdowagdy1866@instapay</p>
+					<p data-lang-key="paymentLink">أو عبر الرابط:</p>
+					<a href="https://ipn.eg/S/abdowagdy1866/instapay/7NYW3Z" target="_blank" class="btn" style="margin-top: 10px;">الدفع الآن عبر InstaPay</a>
+				</div>
+				<p data-lang-key="paymentConfirmation">بعد إتمام الدفع، سيتم تأكيد حجزك خلال 24 ساعة. شكرا لثقتك بنا.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Admin Login Modal -->
+	<div class="modal" id="adminLoginModal">
+		<div class="modal-content">
+			<button class="modal-close" id="closeAdminLoginModal">&times;</button>
+			<h2 class="modal-title" data-lang-key="adminLogin">تسجيل الدخول للإدارة</h2>
+			<form id="adminLoginForm">
+				<div class="form-group">
+					<label for="adminUsername" data-lang-key="username">اسم المستخدم</label>
+					<input type="text" id="adminUsername" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="adminPassword" data-lang-key="password">كلمة المرور</label>
+					<input type="password" id="adminPassword" class="form-control" required>
+				</div>
+				<button type="submit" class="btn" style="width: 100%;" data-lang-key="login">تسجيل الدخول</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Admin Panel -->
+	<div class="admin-panel" id="adminPanel">
+		<div class="admin-header">
+			<div class="container">
+				<h1 data-lang-key="adminPanel">لوحة تحكم يزن ترافل</h1>
+				<button class="btn" id="logoutAdmin" data-lang-key="logout">تسجيل الخروج</button>
+			</div>
+		</div>
+		<div class="admin-nav">
+			<div class="container">
+				<ul>
+					<li><a href="#" class="admin-nav-link active" data-section="bookings" data-lang-key="bookings">الحجوزات</a></li>
+					<li><a href="#" class="admin-nav-link" data-section="hotels" data-lang-key="hotels">الفنادق</a></li>
+					<li><a href="#" class="admin-nav-link" data-section="cruises" data-lang-key="cruises">الرحلات البحرية</a></li>
+					<li><a href="#" class="admin-nav-link" data-section="safaris" data-lang-key="safari">رحلات السفاري</a></li>
+					<li><a href="#" class="admin-nav-link" data-section="offers" data-lang-key="offers">العروض</a></li>
+					<li><a href="#" class="admin-nav-link" data-section="destinations" data-lang-key="destinations">الوجهات</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="admin-content">
+			<div class="container">
+				<!-- Bookings Section -->
+				<div class="admin-section active" id="bookingsSection">
+					<h2 data-lang-key="manageBookings">إدارة الحجوزات</h2>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="fullName">الاسم</th>
+								<th data-lang-key="email">البريد الإلكتروني</th>
+								<th data-lang-key="phone">رقم الهاتف</th>
+								<th data-lang-key="tripType">نوع الرحلة</th>
+								<th data-lang-key="travelDate">التاريخ</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="status">الحالة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="bookingsTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Hotels Section -->
+				<div class="admin-section" id="hotelsSection">
+					<h2 data-lang-key="manageHotels">إدارة الفنادق</h2>
+					<button class="btn" id="addHotelBtn" data-lang-key="addHotel">إضافة فندق جديد</button>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="hotelName">اسم الفندق</th>
+								<th data-lang-key="location">الموقع</th>
+								<th data-lang-key="description">الوصف</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="image">الصورة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="hotelsTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Cruises Section -->
+				<div class="admin-section" id="cruisesSection">
+					<h2 data-lang-key="manageCruises">إدارة الرحلات البحرية</h2>
+					<button class="btn" id="addCruiseBtn" data-lang-key="addCruise">إضافة رحلة بحرية جديدة</button>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="cruiseName">اسم الرحلة</th>
+								<th data-lang-key="destination">الوجهة</th>
+								<th data-lang-key="duration">المدة</th>
+								<th data-lang-key="description">الوصف</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="image">الصورة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="cruisesTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Safaris Section -->
+				<div class="admin-section" id="safarisSection">
+					<h2 data-lang-key="manageSafaris">إدارة رحلات السفاري</h2>
+					<button class="btn" id="addSafariBtn" data-lang-key="addSafari">إضافة رحلة سفاري جديدة</button>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="safariName">اسم الرحلة</th>
+								<th data-lang-key="location">الموقع</th>
+								<th data-lang-key="duration">المدة</th>
+								<th data-lang-key="description">الوصف</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="image">الصورة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="safarisTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Offers Section -->
+				<div class="admin-section" id="offersSection">
+					<h2 data-lang-key="manageOffers">إدارة العروض</h2>
+					<button class="btn" id="addOfferBtn" data-lang-key="addOffer">إضافة عرض جديد</button>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="offerName">اسم العرض</th>
+								<th data-lang-key="description">الوصف</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="discount">الخصم</th>
+								<th data-lang-key="image">الصورة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="offersTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Destinations Section -->
+				<div class="admin-section" id="destinationsSection">
+					<h2 data-lang-key="manageDestinations">إدارة الوجهات</h2>
+					<button class="btn" id="addDestinationBtn" data-lang-key="addDestination">إضافة وجهة جديدة</button>
+					<table class="admin-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th data-lang-key="destinationName">اسم الوجهة</th>
+								<th data-lang-key="description">الوصف</th>
+								<th data-lang-key="price">السعر</th>
+								<th data-lang-key="image">الصورة</th>
+								<th data-lang-key="actions">الإجراءات</th>
+							</tr>
+						</thead>
+						<tbody id="destinationsTable">
+							<!-- سيتم تحميل البيانات ديناميكيًا -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// نظام اللغات
+		const translations = {
+			ar: {
+				home: "الرئيسية",
+				flights: "رحلات الطيران",
+				hotels: "حجز الفنادق",
+				packages: "الباقات السياحية",
+				cruises: "رحلات بحرية",
+				safari: "رحلات سفاري",
+				offers: "عروض خاصة",
+				contact: "اتصل بنا",
+				heroTitle: "استمتع بأفضل عروض السفر والسياحة",
+				heroDesc: "اكتشف العالم مع يزن ترافل - نقدم لك أفضل العروض على تذاكر الطيران، الفنادق، والباقات السياحية",
+				exploreOffers: "استكشف العروض",
+				popularDestinations: "الوجهات الشعبية",
+				specialOffers: "عروض خاصة",
+				ourServices: "خدماتنا",
+				flightBooking: "حجز تذاكر الطيران",
+				flightDesc: "أفضل العروض على تذاكر الطيران الدولية والمحلية",
+				hotelBooking: "حجز الفنادق",
+				hotelDesc: "آلاف الفنادق حول العالم بأفضل الأسعار",
+				cruisesDesc: "رحلات بحرية فاخرة إلى أجمل الجزر والوجهات",
+				safariDesc: "تجارب سفاري فريدة في البراري والصحاري",
+				company: "يزن ترافل",
+				companyDesc: "شركة رائدة في مجال السياحة والسفر، نقدم خدمات متكاملة تشمل حجز تذاكر الطيران، الفنادق، الباقات السياحية، وتأشيرات السفر.",
+				quickLinks: "روابط سريعة",
+				about: "عن الشركة",
+				visas: "تأشيرات السفر",
+				carRental: "تأجير السيارات",
+				contactUs: "اتصل بنا",
+				address: "الكوثر12 الغردقه المدينة، الغردقه، مصر",
+				copyright: "جميع الحقوق محفوظة &copy; 2026 يزن ترافل",
+				bookTrip: "حجز رحلة",
+				fullName: "الاسم الكامل",
+				email: "البريد الإلكتروني",
+				phone: "رقم الهاتف",
+				travelDate: "تاريخ السفر",
+				travelersCount: "عدد المسافرين",
+				tripType: "نوع الرحلة",
+				bookNow: "احجز الآن",
+				adminLogin: "تسجيل الدخول للإدارة",
+				username: "اسم المستخدم",
+				password: "كلمة المرور",
+				login: "تسجيل الدخول",
+				adminPanel: "لوحة تحكم يزن ترافل",
+				logout: "تسجيل الخروج",
+				bookings: "الحجوزات",
+				destinations: "الوجهات",
+				manageBookings: "إدارة الحجوزات",
+				status: "الحالة",
+				actions: "الإجراءات",
+				manageOffers: "إدارة العروض",
+				addOffer: "إضافة عرض جديد",
+				offerName: "اسم العرض",
+				description: "الوصف",
+				price: "السعر",
+				manageDestinations: "إدارة الوجهات",
+				addDestination: "إضافة وجهة جديدة",
+				destinationName: "اسم الوجهة",
+				payment: "الدفع عبر InstaPay",
+				paymentInstructions: "تعليمات الدفع",
+				paymentDesc: "لإتمام عملية الدفع، يرجى تحويل المبلغ إلى الحساب التالي:",
+				paymentLink: "أو عبر الرابط:",
+				paymentConfirmation: "بعد إتمام الدفع، سيتم تأكيد حجزك خلال 24 ساعة.",
+				manageHotels: "إدارة الفنادق",
+				addHotel: "إضافة فندق جديد",
+				hotelName: "اسم الفندق",
+				location: "الموقع",
+				manageCruises: "إدارة الرحلات البحرية",
+				addCruise: "إضافة رحلة بحرية جديدة",
+				cruiseName: "اسم الرحلة",
+				destination: "الوجهة",
+				duration: "المدة",
+				manageSafaris: "إدارة رحلات السفاري",
+				addSafari: "إضافة رحلة سفاري جديدة",
+				safariName: "اسم الرحلة",
+				image: "الصورة",
+				discount: "الخصم"
+			},
+			en: {
+				home: "Home",
+				flights: "Flights",
+				hotels: "Hotels",
+				packages: "Packages",
+				cruises: "Cruises",
+				safari: "Safari",
+				offers: "Special Offers",
+				contact: "Contact",
+				heroTitle: "Enjoy the Best Travel and Tourism Offers",
+				heroDesc: "Discover the world with Yazan Travel - We offer you the best deals on flight tickets, hotels, and tour packages",
+				exploreOffers: "Explore Offers",
+				popularDestinations: "Popular Destinations",
+				specialOffers: "Special Offers",
+				ourServices: "Our Services",
+				flightBooking: "Flight Booking",
+				flightDesc: "Best deals on international and domestic flight tickets",
+				hotelBooking: "Hotel Booking",
+				hotelDesc: "Thousands of hotels worldwide at the best prices",
+				cruisesDesc: "Luxury cruises to the most beautiful islands and destinations",
+				safariDesc: "Unique safari experiences in wilderness and deserts",
+				company: "Yazan Travel",
+				companyDesc: "A leading company in tourism and travel, we provide integrated services including flight booking, hotels, tour packages, and visas.",
+				quickLinks: "Quick Links",
+				about: "About",
+				visas: "Visas",
+				carRental: "Car Rental",
+				contactUs: "Contact Us",
+				address: "123 City Street, Cairo, Egypt",
+				copyright: "All rights reserved &copy; 2026 Yazan Travel",
+				bookTrip: "Book a Trip",
+				fullName: "Full Name",
+				email: "Email",
+				phone: "Phone",
+				travelDate: "Travel Date",
+				travelersCount: "Number of Travelers",
+				tripType: "Trip Type",
+				bookNow: "Book Now",
+				adminLogin: "Admin Login",
+				username: "Username",
+				password: "Password",
+				login: "Login",
+				adminPanel: "Yazan Travel Admin Panel",
+				logout: "Logout",
+				bookings: "Bookings",
+				destinations: "Destinations",
+				manageBookings: "Manage Bookings",
+				status: "Status",
+				actions: "Actions",
+				manageOffers: "Manage Offers",
+				addOffer: "Add New Offer",
+				offerName: "Offer Name",
+				description: "Description",
+				price: "Price",
+				manageDestinations: "Manage Destinations",
+				addDestination: "Add New Destination",
+				destinationName: "Destination Name",
+				payment: "Payment via InstaPay",
+				paymentInstructions: "Payment Instructions",
+				paymentDesc: "To complete the payment, please transfer the amount to the following account:",
+				paymentLink: "Or via the link:",
+				paymentConfirmation: "After completing the payment, your booking will be confirmed within 24 hours.",
+				manageHotels: "Manage Hotels",
+				addHotel: "Add New Hotel",
+				hotelName: "Hotel Name",
+				location: "Location",
+				manageCruises: "Manage Cruises",
+				addCruise: "Add New Cruise",
+				cruiseName: "Cruise Name",
+				destination: "Destination",
+				duration: "Duration",
+				manageSafaris: "Manage Safaris",
+				addSafari: "Add New Safari",
+				safariName: "Safari Name",
+				image: "Image",
+				discount: "Discount"
+			},
+			ru: {
+				home: "Главная",
+				flights: "Авиаперелеты",
+				hotels: "Отели",
+				packages: "Туры",
+				cruises: "Круизы",
+				safari: "Сафари",
+				offers: "Спецпредложения",
+				contact: "Контакты",
+				heroTitle: "Наслаждайтесь лучшими предложениями путешествий и туризма",
+				heroDesc: "Откройте для себя мир с Yazan Travel - мы предлагаем лучшие deals на авиабилеты, отели и туристические пакеты",
+				exploreOffers: "Исследовать предложения",
+				popularDestinations: "Популярные направления",
+				specialOffers: "Специальные предложения",
+				ourServices: "Наши услуги",
+				flightBooking: "Бронирование авиабилетов",
+				flightDesc: "Лучшие предложения на международные и внутренние авиабилеты",
+				hotelBooking: "Бронирование отелей",
+				hotelDesc: "Тысячи отелей по всему миру по лучшим ценам",
+				cruisesDesc: "Роскошные круизы к самым красивым островам и направлениям",
+				safariDesc: "Уникальные сафари-приключения в дикой природе и пустыням",
+				company: "Yazan Travel",
+				companyDesc: "Ведущая компания в сфере туризма и путешествий, мы предоставляем комплексные услуги, включая бронирование авиабилетов, отелей, туристических пакетов и виз.",
+				quickLinks: "Быстрые ссылки",
+				about: "О нас",
+				visas: "Визы",
+				carRental: "Аренда автомобилей",
+				contactUs: "Свяжитесь с нами",
+				address: "ул. Городская, 123, Каир, Египет",
+				copyright: "Все права защищены &copy; 2026 Yazan Travel",
+				bookTrip: "Забронировать поездку",
+				fullName: "Полное имя",
+				email: "Эл. почта",
+				phone: "Телефон",
+				travelDate: "Дата поездки",
+				travelersCount: "Количество путешественников",
+				tripType: "Тип поездки",
+				bookNow: "Забронировать сейчас",
+				adminLogin: "Вход для администратора",
+				username: "Имя пользователя",
+				password: "Пароль",
+				login: "Войти",
+				adminPanel: "Панель управления Yazan Travel",
+				logout: "Выйти",
+				bookings: "Бронирования",
+				destinations: "Направления",
+				manageBookings: "Управление бронированиями",
+				status: "Статус",
+				actions: "Действия",
+				manageOffers: "Управление предложениями",
+				addOffer: "Добавить новое предложение",
+				offerName: "Название предложения",
+				description: "Описание",
+				price: "Цена",
+				manageDestinations: "Управление направлениями",
+				addDestination: "Добавить новое направление",
+				destinationName: "Название направления",
+				payment: "Оплата через InstaPay",
+				paymentInstructions: "Инструкции по оплате",
+				paymentDesc: "Для завершения оплаты, пожалуйста, переведите сумму на следующий счет:",
+				paymentLink: "Или по ссылке:",
+				paymentConfirmation: "После завершения оплаты ваше бронирование будет подтверждено в течение 24 часов.",
+				manageHotels: "Управление отелями",
+				addHotel: "Добавить новый отель",
+				hotelName: "Название отеля",
+				location: "Местоположение",
+				manageCruises: "Управление круизами",
+				addCruise: "Добавить новый круиз",
+				cruiseName: "Название круиза",
+				destination: "Направление",
+				duration: "Продолжительность",
+				manageSafaris: "Управление сафари",
+				addSafari: "Добавить новое сафари",
+				safariName: "Название сафари",
+				image: "Изображение",
+				discount: "Скидка"
+			},
+			de: {
+				home: "Startseite",
+				flights: "Flüge",
+				hotels: "Hotels",
+				packages: "Pakete",
+				cruises: "Kreuzfahrten",
+				safari: "Safari",
+				offers: "Sonderangebote",
+				contact: "Kontakt",
+				heroTitle: "Genießen Sie die besten Reise- und Tourismusangebote",
+				heroDesc: "Entdecken Sie die Welt mit Yazan Travel - Wir bieten Ihnen die besten Angebote für Flugtickets, Hotels und Reisepakete",
+				exploreOffers: "Angebote entdecken",
+				popularDestinations: "Beliebte Reiseziele",
+				specialOffers: "Sonderangebote",
+				ourServices: "Unsere Dienstleistungen",
+				flightBooking: "Flugbuchung",
+				flightDesc: "Beste Angebote für internationale und Inlandsflugtickets",
+				hotelBooking: "Hotelbuchung",
+				hotelDesc: "Tausende von Hotels weltweit zu den besten Preisen",
+				cruisesDesc: "Luxuskreuzfahrten zu den schönsten Inseln und Zielen",
+				safariDesc: "Einzigartige Safari-Erlebnisse в Wildnis und Wüsten",
+				company: "Yazan Travel",
+				companyDesc: "Ein führendes Unternehmen im Tourismus- und Reisebereich, wir bieten integrierte Dienstleistungen einschließlich Flugbuchung, Hotels, Reisepakete und Visa.",
+				quickLinks: "Schnelllinks",
+				about: "Über uns",
+				visas: "Visa",
+				carRental: "Autovermietung",
+				contactUs: "Kontaktieren Sie uns",
+				address: "Stadtstraße 123, Kairo, Ägypten",
+				copyright: "Alle Rechte vorbehalten &copy; 2026 Yazan Travel",
+				bookTrip: "Reise buchen",
+				fullName: "Vollständiger Name",
+				email: "E-Mail",
+				phone: "Telefon",
+				travelDate: "Reisedatum",
+				travelersCount: "Anzahl der Reisenden",
+				tripType: "Reiseart",
+				bookNow: "Jetzt buchen",
+				adminLogin: "Admin-Login",
+				username: "Benutzername",
+				password: "Passwort",
+				login: "Anmelden",
+				adminPanel: "Yazan Travel Admin-Panel",
+				logout: "Abmelden",
+				bookings: "Buchungen",
+				destinations: "Reiseziele",
+				manageBookings: "Buchungen verwalten",
+				status: "Status",
+				actions: "Aktionen",
+				manageOffers: "Angebote verwalten",
+				addOffer: "Neues Angebot hinzufügen",
+				offerName: "Angebotsname",
+				description: "Beschreibung",
+				price: "Preis",
+				manageDestinations: "Reiseziele verwalten",
+				addDestination: "Neues Reiseziel hinzufügen",
+				destinationName: "Zielname",
+				payment: "Zahlung über InstaPay",
+				paymentInstructions: "Zahlungsanweisungen",
+				paymentDesc: "Um die Zahlung abzuschließen, überweisen Sie bitte den Betrag auf das folgende Konto:",
+				paymentLink: "Oder über den Link:",
+				paymentConfirmation: "Nach Abschluss der Zahlung wird Ihre Buchung innerhalb von 24 Stunden bestätigt.",
+				manageHotels: "Hotels verwalten",
+				addHotel: "Neues Hotel hinzufügen",
+				hotelName: "Hotelname",
+				location: "Standort",
+				manageCruises: "Kreuzfahrten verwalten",
+				addCruise: "Neue Kreuzfahrt hinzufügen",
+				cruiseName: "Kreuzfahrtname",
+				destination: "Ziel",
+				duration: "Dauer",
+				manageSafaris: "Safaris verwalten",
+				addSafari: "Neue Safari hinzufügen",
+				safariName: "Safariname",
+				image: "Bild",
+				discount: "Rabatt"
+			}
+		};
+
+		// البيانات الافتراضية
+		let destinations = JSON.parse(localStorage.getItem('destinations')) || [
+			{
+				id: 1,
+				name: "الغردقه",
+				description: "مدينة الأحلام والرفاهية، تجمع بين الأصالة والحداثة",
+				price: 650,
+				image: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				type: "hotel"
+			},
+			{
+				id: 2,
+				name: "مرسي علم ",
+				description: "حيث تلتقي أوروبا بآسيا في لوحة ساحرة من التاريخ والثقافة",
+				price: 420,
+				image: "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				type: "hotel"
+			},
+			{
+				id: 3,
+				name: "مكادي",
+				description: "طبيعة خلابة وجزر ساحرة وتجربة تسوق لا تُنسى",
+				price: 580,
+				image: "https://images.unsplash.com/photo-1562602833-1b13afa4d36c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				type: "hotel"
+			},
+			{
+				id: 4,
+				name: "الساحل الشمالي",
+				description: "أرض الفراعنة والتاريخ العريق ونهر النيل الخالد",
+				price: 350,
+				image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				type: "hotel"
+			}
+		];
+
+		let offers = JSON.parse(localStorage.getItem('offers')) || [
+			{
+				id: 1,
+				name: "شرم الشبخ",
+				description: "5 أيام / 4 ليالي مع جولة في أشهر معالم المدينة",
+				price: 799,
+				discount: "25%",
+				image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				date: "15 سبتمبر - 20 سبتمبر"
+			},
+			{
+				id: 2,
+				name: " عرض شهر العسل بالغردقه",
+				description: "7 أيام / 6 ليالي مع أنشطة عائلية متنوعة",
+				price: 920,
+				discount: "عرض العائلة",
+				image: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				date: "10 أكتوبر - 17 أكتوبر"
+			},
+			{
+				id: 3,
+				name: " عرض مايتفوتش ",
+				description: "6 أيام / 5 ليالي في أحضان الطبيعة الخلابة",
+				price: 1100,
+				discount: "عرض الشهر",
+				image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+				date: "5 نوفمبر - 11 نوفمبر"
+			}
+		];
+
+		let hotels = JSON.parse(localStorage.getItem('hotels')) || [
+			{
+				id: 1,
+				name: "فندق  صني دايز. البلاسيو  ",
+				location: "الغردقه ، ",
+				description: "فندق 5 نجوم فاخر مع إطلالة خلابة على البحر  مباشره",
+				price: 7500,
+				image: "https://share.google/JLevy3UTfa8Y0hGsn"
+			},
+			{
+				id: 2,
+				name: "فندق شيراتون",
+				location: "القاهرة، مصر",
+				description: "فندق 5 نجوم في قلب القاهرة مع خدمات فاخرة",
+				price: 200,
+				image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+			}
+		];
+
+		let cruises = JSON.parse(localStorage.getItem('cruises')) || [
+			{
+				id: 1,
+				name: "رحلة بحرية إلى البحر الأحمر",
+				destination: "البحر الأحمر",
+				duration: "7 أيام",
+				description: "رحلة بحرية فاخرة تشمل زيارة الجزر والمنتجعات السياحية",
+				price: 1200,
+				image: "https://images.unsplash.com/photo-1571718987430-1f9d74833494?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+			}
+		];
+
+		let safaris = JSON.parse(localStorage.getItem('safaris')) || [
+			{
+				id: 1,
+				name: "رحلة سفاري في الصحراء",
+				location: "الصحراء الكبرى",
+				duration: "3 أيام",
+				description: "تجربة سفاري فريدة في قلب الصحراء مع مرشدين محترفين",
+				price: 350,
+				image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+			}
+		];
+
+		let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+		let currentBookingType = '';
+		let currentBookingPrice = 0;
+		let currentLang = 'ar';
+
+		// تهيئة التطبيق
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeApp();
+		});
+
+		function initializeApp() {
+			// تحميل البيانات
+			loadDestinations();
+			loadOffers();
+			loadHotels();
+			loadCruises();
+			loadSafaris();
+
+			// إعداد الأحداث
+			setupEventListeners();
+
+			// تحميل اللغات
+			setupLanguageSystem();
+		}
+
+		function setupLanguageSystem() {
+			// إعداد أزرار تغيير اللغة
+			const langButtons = document.querySelectorAll('.lang-btn');
+			
+			langButtons.forEach(btn => {
+				btn.addEventListener('click', () => {
+					langButtons.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					currentLang = btn.getAttribute('data-lang');
+					updateLanguage();
+				});
+			});
+
+			// تحديث اللغة أول مرة
+			updateLanguage();
+		}
+
+		function updateLanguage() {
+			document.querySelectorAll('[data-lang-key]').forEach(element => {
+				const key = element.getAttribute('data-lang-key');
+				if (translations[currentLang][key]) {
+					element.textContent = translations[currentLang][key];
+				}
+			});
+		}
+
+		function setupEventListeners() {
+			// أيقونة الإدارة
+			document.getElementById('adminIcon').addEventListener('click', function(e) {
+				e.preventDefault();
+				document.getElementById('adminLoginModal').classList.add('active');
+			});
+
+			// إغلاق النماذج
+			document.getElementById('closeBookingModal').addEventListener('click', function() {
+				document.getElementById('bookingModal').classList.remove('active');
+			});
+
+			document.getElementById('closePaymentModal').addEventListener('click', function() {
+				document.getElementById('paymentModal').classList.remove('active');
+			});
+
+			document.getElementById('closeAdminLoginModal').addEventListener('click', function() {
+				document.getElementById('adminLoginModal').classList.remove('active');
+			});
+
+			// نموذج تسجيل الدخول للإدارة
+			document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+				e.preventDefault();
+				const username = document.getElementById('adminUsername').value;
+				const password = document.getElementById('adminPassword').value;
+				
+				if (username === 'abdowagdy' && password === '1866') {
+					document.getElementById('adminLoginModal').classList.remove('active');
+					document.getElementById('adminPanel').classList.add('active');
+					loadAdminData();
+				} else {
+					alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+				}
+			});
+
+			// تسجيل الخروج من لوحة التحكم
+			document.getElementById('logoutAdmin').addEventListener('click', function() {
+				document.getElementById('adminPanel').classList.remove('active');
+			});
+
+			// التنقل في لوحة التحكم
+			document.querySelectorAll('.admin-nav-link').forEach(link => {
+				link.addEventListener('click', function(e) {
+					e.preventDefault();
+					const section = this.getAttribute('data-section');
+					
+					document.querySelectorAll('.admin-nav-link').forEach(l => l.classList.remove('active'));
+					this.classList.add('active');
+					
+					document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+					document.getElementById(section + 'Section').classList.add('active');
+				});
+			});
+
+			// نموذج الحجز
+			document.getElementById('bookingForm').addEventListener('submit', function(e) {
+				e.preventDefault();
+				
+				const booking = {
+					id: Date.now(),
+					name: document.getElementById('bookingName').value,
+					email: document.getElementById('bookingEmail').value,
+					phone: document.getElementById('bookingPhone').value,
+					date: document.getElementById('bookingDate').value,
+					travelers: document.getElementById('bookingTravelers').value,
+					type: document.getElementById('bookingType').value,
+					price: document.getElementById('bookingPrice').value,
+					status: 'قيد المراجعة',
+					timestamp: new Date().toLocaleString()
+				};
+				
+				bookings.push(booking);
+				localStorage.setItem('bookings', JSON.stringify(bookings));
+				
+				document.getElementById('bookingModal').classList.remove('active');
+				document.getElementById('paymentModal').classList.add('active');
+				
+				// تحديث جدول الحجوزات في لوحة التحكم
+				if (document.getElementById('adminPanel').classList.contains('active')) {
+					loadBookingsTable();
+				}
+				
+				this.reset();
+			});
+
+			// أزرار إضافة جديدة في لوحة التحكم
+			document.getElementById('addHotelBtn').addEventListener('click', function() {
+				addNewItem('hotel');
+			});
+
+			document.getElementById('addCruiseBtn').addEventListener('click', function() {
+				addNewItem('cruise');
+			});
+
+			document.getElementById('addSafariBtn').addEventListener('click', function() {
+				addNewItem('safari');
+			});
+
+			document.getElementById('addOfferBtn').addEventListener('click', function() {
+				addNewItem('offer');
+			});
+
+			document.getElementById('addDestinationBtn').addEventListener('click', function() {
+				addNewItem('destination');
+			});
+
+			// Mode toggle
+			const modeToggle = document.getElementById('modeToggle');
+			modeToggle.addEventListener('click', () => {
+				document.body.classList.toggle('light');
+				modeToggle.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+			});
+
+			// Cursor
+			const cursor = document.getElementById('cursor');
+			document.addEventListener('mousemove', e => {
+				cursor.style.left = `${e.clientX}px`;
+				cursor.style.top = `${e.clientY}px`;
+			});
+
+			// WhatsApp link
+			const whatsappLink = document.getElementById('whatsappLink');
+			whatsappLink.addEventListener('click', (e) => {
+				e.preventDefault();
+				const message = getTranslation('whatsappMessage');
+				const encodedMessage = encodeURIComponent(message);
+				const whatsappURL = `https://wa.me/201273426669?text=${encodedMessage}`;
+				window.open(whatsappURL, '_blank');
+			});
+
+			// إغلاق النماذج بالنقر خارجها
+			document.addEventListener('click', function(e) {
+				if (e.target.classList.contains('modal')) {
+					e.target.classList.remove('active');
+				}
+			});
+		}
+
+		function getTranslation(key) {
+			const translationsByLang = {
+				ar: {
+					bookingSuccess: 'تم إرسال طلب الحجز بنجاح! سنتواصل معك قريباً.',
+					whatsappMessage: 'مرحباً، أريد الاستفسار عن عروض السفر'
+				},
+				en: {
+					bookingSuccess: 'Booking request sent successfully! We will contact you soon.',
+					whatsappMessage: 'Hello, I want to inquire about travel offers'
+				},
+				ru: {
+					bookingSuccess: 'Запрос на бронирование отправлен успешно! Мы свяжемся с вами в ближайшее время.',
+					whatsappMessage: 'Здравствуйте, я хочу узнать о туристических предложениях'
+				},
+				de: {
+					bookingSuccess: 'Buchungsanfrage erfolgreich gesendet! Wir werden uns в Kürze mit Ihnen in Verbindung setzen.',
+					whatsappMessage: 'Hallo, ich möchte mich über Reiseangebote informieren'
+				}
+			};
+			
+			return translationsByLang[currentLang]?.[key] || key;
+		}
+
+		function loadDestinations() {
+			const grid = document.getElementById('destinationsGrid');
+			grid.innerHTML = '';
+			
+			if (destinations.length === 0) {
+				grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">لا توجد وجهات متاحة حالياً</p>';
+				return;
+			}
+			
+			destinations.forEach(destination => {
+				const card = document.createElement('div');
+				card.className = 'destination-card';
+				card.innerHTML = `
+					<div class="card-img">
+						<img src="${destination.image}" alt="${destination.name}">
+					</div>
+					<div class="card-content">
+						<h3>${destination.name}</h3>
+						<p>${destination.description}</p>
+						<div class="card-price">
+							<span class="price">$${destination.price}</span>
+							<button class="btn book-btn" data-type="${destination.name}" data-price="${destination.price}">${getTranslation('bookNow')}</button>
+						</div>
+					</div>
+				`;
+				grid.appendChild(card);
+			});
+			
+			// إضافة أحداث لأزرار الحجز
+			document.querySelectorAll('.book-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					currentBookingType = this.getAttribute('data-type');
+					currentBookingPrice = this.getAttribute('data-price');
+					document.getElementById('bookingType').value = currentBookingType;
+					document.getElementById('bookingPrice').value = `$${currentBookingPrice}`;
+					document.getElementById('bookingModal').classList.add('active');
+				});
+			});
+		}
+
+		function loadOffers() {
+			const slider = document.getElementById('offersSlider');
+			slider.innerHTML = '';
+			
+			if (offers.length === 0) {
+				slider.innerHTML = '<p style="text-align: center; width: 100%;">لا توجد عروض خاصة حالياً</p>';
+				return;
+			}
+			
+			offers.forEach(offer => {
+				const card = document.createElement('div');
+				card.className = 'offer-card';
+				card.innerHTML = `
+					<div class="offer-badge">${offer.discount}</div>
+					<div class="card-img">
+						<img src="${offer.image}" alt="${offer.name}">
+					</div>
+					<div class="card-content">
+						<h3>${offer.name}</h3>
+						<p>${offer.description}</p>
+						<div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 14px; color: #bbb;">
+							<span><i class="far fa-calendar"></i> ${offer.date}</span>
+							<span class="price">$${offer.price}</span>
+						</div>
+						<button class="btn book-offer-btn" style="width: 100%; margin-top: 15px;" data-type="${offer.name}" data-price="${offer.price}">${getTranslation('bookNow')}</button>
+					</div>
+				`;
+				slider.appendChild(card);
+			});
+			
+			// إضافة أحداث لأزرار حجز العروض
+			document.querySelectorAll('.book-offer-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					currentBookingType = this.getAttribute('data-type');
+					currentBookingPrice = this.getAttribute('data-price');
+					document.getElementById('bookingType').value = currentBookingType;
+					document.getElementById('bookingPrice').value = `$${currentBookingPrice}`;
+					document.getElementById('bookingModal').classList.add('active');
+				});
+			});
+		}
+
+		function loadHotels() {
+			// سيتم تحميل الفنادق في لوحة التحكم فقط
+			// لا حاجة لتنفيذ أي شيء هنا
+		}
+
+		function loadCruises() {
+			// سيتم تحميل الرحلات البحرية في لوحة التحكم فقط
+			// لا حاجة لتنفيذ أي شيء هنا
+		}
+
+		function loadSafaris() {
+			// سيتم تحميل رحلات السفاري في لوحة التحكم فقط
+			// لا حاجة لتنفيذ أي شيء هنا
+		}
+
+		function loadAdminData() {
+			loadBookingsTable();
+			loadHotelsTable();
+			loadCruisesTable();
+			loadSafarisTable();
+			loadOffersTable();
+			loadDestinationsTable();
+		}
+		
+		function loadBookingsTable() {
+			const table = document.getElementById('bookingsTable');
+			table.innerHTML = '';
+			
+			if (bookings.length === 0) {
+				table.innerHTML = '<tr><td colspan="9" style="text-align: center;">لا توجد حجوزات</td></tr>';
+				return;
+			}
+			
+			bookings.forEach((booking, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${booking.name}</td>
+					<td>${booking.email}</td>
+					<td>${booking.phone}</td>
+					<td>${booking.type}</td>
+					<td>${booking.date}</td>
+					<td>${booking.price}</td>
+					<td>${booking.status}</td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${booking.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#bookingsTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteBooking(id);
+				});
+			});
+		}
+		
+		function loadHotelsTable() {
+			const table = document.getElementById('hotelsTable');
+			table.innerHTML = '';
+			
+			if (hotels.length === 0) {
+				table.innerHTML = '<tr><td colspan="7" style="text-align: center;">لا توجد فنادق</td></tr>';
+				return;
+			}
+			
+			hotels.forEach((hotel, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${hotel.name}</td>
+					<td>${hotel.location}</td>
+					<td>${hotel.description}</td>
+					<td>$${hotel.price}</td>
+					<td><img src="${hotel.image}" alt="${hotel.name}" class="thumbnail"></td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${hotel.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#hotelsTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteItem('hotels', id);
+				});
+			});
+		}
+		
+		function loadCruisesTable() {
+			const table = document.getElementById('cruisesTable');
+			table.innerHTML = '';
+			
+			if (cruises.length === 0) {
+				table.innerHTML = '<tr><td colspan="8" style="text-align: center;">لا توجد رحلات بحرية</td></tr>';
+				return;
+			}
+			
+			cruises.forEach((cruise, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${cruise.name}</td>
+					<td>${cruise.destination}</td>
+					<td>${cruise.duration}</td>
+					<td>${cruise.description}</td>
+					<td>$${cruise.price}</td>
+					<td><img src="${cruise.image}" alt="${cruise.name}" class="thumbnail"></td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${cruise.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#cruisesTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteItem('cruises', id);
+				});
+			});
+		}
+		
+		function loadSafarisTable() {
+			const table = document.getElementById('safarisTable');
+			table.innerHTML = '';
+			
+			if (safaris.length === 0) {
+				table.innerHTML = '<tr><td colspan="8" style="text-align: center;">لا توجد رحلات سفاري</td></tr>';
+				return;
+			}
+			
+			safaris.forEach((safari, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${safari.name}</td>
+					<td>${safari.location}</td>
+					<td>${safari.duration}</td>
+					<td>${safari.description}</td>
+					<td>$${safari.price}</td>
+					<td><img src="${safari.image}" alt="${safari.name}" class="thumbnail"></td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${safari.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#safarisTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteItem('safaris', id);
+				});
+			});
+		}
+		
+		function loadOffersTable() {
+			const table = document.getElementById('offersTable');
+			table.innerHTML = '';
+			
+			if (offers.length === 0) {
+				table.innerHTML = '<tr><td colspan="7" style="text-align: center;">لا توجد عروض</td></tr>';
+				return;
+			}
+			
+			offers.forEach((offer, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${offer.name}</td>
+					<td>${offer.description}</td>
+					<td>$${offer.price}</td>
+					<td>${offer.discount}</td>
+					<td><img src="${offer.image}" alt="${offer.name}" class="thumbnail"></td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${offer.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#offersTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteItem('offers', id);
+				});
+			});
+		}
+		
+		function loadDestinationsTable() {
+			const table = document.getElementById('destinationsTable');
+			table.innerHTML = '';
+			
+			if (destinations.length === 0) {
+				table.innerHTML = '<tr><td colspan="6" style="text-align: center;">لا توجد وجهات</td></tr>';
+				return;
+			}
+			
+			destinations.forEach((destination, index) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${index + 1}</td>
+					<td>${destination.name}</td>
+					<td>${destination.description}</td>
+					<td>$${destination.price}</td>
+					<td><img src="${destination.image}" alt="${destination.name}" class="thumbnail"></td>
+					<td>
+						<button class="action-btn delete-btn" data-id="${destination.id}">حذف</button>
+					</td>
+				`;
+				table.appendChild(row);
+			});
+			
+			// إضافة أحداث لأزرار الحذف
+			document.querySelectorAll('#destinationsTable .delete-btn').forEach(btn => {
+				btn.addEventListener('click', function() {
+					const id = parseInt(this.getAttribute('data-id'));
+					deleteItem('destinations', id);
+				});
+			});
+		}
+		
+		function deleteItem(type, id) {
+			if (confirm('هل أنت متأكد من حذف هذا العنصر؟')) {
+				if (type === 'offers') {
+					offers = offers.filter(item => item.id !== id);
+					localStorage.setItem('offers', JSON.stringify(offers));
+					loadOffersTable();
+					loadOffers();
+				} else if (type === 'destinations') {
+					destinations = destinations.filter(item => item.id !== id);
+					localStorage.setItem('destinations', JSON.stringify(destinations));
+					loadDestinationsTable();
+					loadDestinations();
+				} else if (type === 'hotels') {
+					hotels = hotels.filter(item => item.id !== id);
+					localStorage.setItem('hotels', JSON.stringify(hotels));
+					loadHotelsTable();
+				} else if (type === 'cruises') {
+					cruises = cruises.filter(item => item.id !== id);
+					localStorage.setItem('cruises', JSON.stringify(cruises));
+					loadCruisesTable();
+				} else if (type === 'safaris') {
+					safaris = safaris.filter(item => item.id !== id);
+					localStorage.setItem('safaris', JSON.stringify(safaris));
+					loadSafarisTable();
+				}
+			}
+		}
+
+		function deleteBooking(id) {
+			if (confirm('هل أنت متأكد من حذف هذه الحجز؟')) {
+				bookings = bookings.filter(booking => booking.id !== id);
+				localStorage.setItem('bookings', JSON.stringify(bookings));
+				loadBookingsTable();
+			}
+		}
+
+		function addNewItem(type) {
+			if (type === 'hotel') {
+				const name = prompt('أدخل اسم الفندق:');
+				if (!name) return;
+				
+				const location = prompt('أدخل موقع الفندق:');
+				if (!location) return;
+				
+				const description = prompt('أدخل وصف الفندق:');
+				if (!description) return;
+				
+				const price = prompt('أدخل سعر الفندق:');
+				if (!price) return;
+				
+				// إضافة طلب رابط الصورة
+				const image = prompt('أدخل رابط صورة الفندق:');
+				if (!image) return;
+				
+				const newHotel = {
+					id: Date.now(),
+					name: name,
+					location: location,
+					description: description,
+					price: parseInt(price),
+					image: image
+				};
+				
+				hotels.push(newHotel);
+				localStorage.setItem('hotels', JSON.stringify(hotels));
+				loadHotelsTable();
+				// إضافة الفندق إلى قسم الوجهات في الصفحة الرئيسية
+				addToDestinations(newHotel, 'hotel');
+				
+			} else if (type === 'cruise') {
+				const name = prompt('أدخل اسم الرحلة البحرية:');
+				if (!name) return;
+				
+				const destination = prompt('أدخل وجهة الرحلة:');
+				if (!destination) return;
+				
+				const duration = prompt('أدخل مدة الرحلة:');
+				if (!duration) return;
+				
+				const description = prompt('أدخل وصف الرحلة:');
+				if (!description) return;
+				
+				const price = prompt('أدخل سعر الرحلة:');
+				if (!price) return;
+				
+				// إضافة طلب رابط الصورة
+				const image = prompt('أدخل رابط صورة الرحلة البحرية:');
+				if (!image) return;
+				
+				const newCruise = {
+					id: Date.now(),
+					name: name,
+					destination: destination,
+					duration: duration,
+					description: description,
+					price: parseInt(price),
+					image: image
+				};
+				
+				cruises.push(newCruise);
+				localStorage.setItem('cruises', JSON.stringify(cruises));
+				loadCruisesTable();
+				// إضافة الرحلة البحرية إلى قسم الوجهات في الصفحة الرئيسية
+				addToDestinations(newCruise, 'cruise');
+				
+			} else if (type === 'safari') {
+				const name = prompt('أدخل اسم رحلة السفاري:');
+				if (!name) return;
+				
+				const location = prompt('أدخل موقع الرحلة:');
+				if (!location) return;
+				
+				const duration = prompt('أدخل مدة الرحلة:');
+				if (!duration) return;
+				
+				const description = prompt('أدخل وصف الرحلة:');
+				if (!description) return;
+				
+				const price = prompt('أدخل سعر الرحلة:');
+				if (!price) return;
+				
+				// إضافة طلب رابط الصورة
+				const image = prompt('أدخل رابط صورة رحلة السفاري:');
+				if (!image) return;
+				
+				const newSafari = {
+					id: Date.now(),
+					name: name,
+					location: location,
+					duration: duration,
+					description: description,
+					price: parseInt(price),
+					image: image
+				};
+				
+				safaris.push(newSafari);
+				localStorage.setItem('safaris', JSON.stringify(safaris));
+				loadSafarisTable();
+				// إضافة رحلة السفاري إلى قسم الوجهات في الصفحة الرئيسية
+				addToDestinations(newSafari, 'safari');
+				
+			} else if (type === 'offer') {
+				const name = prompt('أدخل اسم العرض:');
+				if (!name) return;
+				
+				const description = prompt('أدخل وصف العرض:');
+				if (!description) return;
+				
+				const price = prompt('أدخل سعر العرض:');
+				if (!price) return;
+				
+				const discount = prompt('أدخل نسبة الخصم:');
+				if (!discount) return;
+				
+				const date = prompt('أدخل تاريخ العرض:');
+				if (!date) return;
+				
+				// إضافة طلب رابط الصورة
+				const image = prompt('أدخل رابط صورة العرض:');
+				if (!image) return;
+				
+				const newOffer = {
+					id: Date.now(),
+					name: name,
+					description: description,
+					price: parseInt(price),
+					discount: discount,
+					date: date,
+					image: image
+				};
+				
+				offers.push(newOffer);
+				localStorage.setItem('offers', JSON.stringify(offers));
+				loadOffersTable();
+				loadOffers();
+				
+			} else if (type === 'destination') {
+				const name = prompt('أدخل اسم الوجهة:');
+				if (!name) return;
+				
+				const description = prompt('أدخل وصف الوجهة:');
+				if (!description) return;
+				
+				const price = prompt('أدخل سعر الوجهة:');
+				if (!price) return;
+				
+				// إضافة طلب رابط الصورة
+				const image = prompt('أدخل رابط صورة الوجهة:');
+				if (!image) return;
+				
+				const newDestination = {
+					id: Date.now(),
+					name: name,
+					description: description,
+					price: parseInt(price),
+					image: image,
+					type: "وجهة"
+				};
+				
+				destinations.push(newDestination);
+				localStorage.setItem('destinations', JSON.stringify(destinations));
+				loadDestinationsTable();
+				loadDestinations();
+			}
+			
+			alert('تمت الإضافة بنجاح!');
+		}
+
+		// دالة جديدة لإضافة العناصر إلى قسم الوجهات في الصفحة الرئيسية
+		function addToDestinations(item, type) {
+			const destinationItem = {
+				id: item.id,
+				name: item.name,
+				description: item.description,
+				price: item.price,
+				image: item.image,
+				type: type
+			};
+			
+			// تصحيح: إضافة العنصر إلى المصفوفة فقط إذا لم يكن موجودًا مسبقًا
+			const exists = destinations.some(dest => dest.id === destinationItem.id);
+			if (!exists) {
+				destinations.push(destinationItem);
+				localStorage.setItem('destinations', JSON.stringify(destinations));
+				loadDestinations();
+			}
+		}
+
+		// Particle canvas
+		const canvas = document.getElementById('particlesCanvas');
+		const ctx = canvas.getContext('2d');
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		
+		let particles = [];
+		for (let i = 0; i < 100; i++) {
+			particles.push({
+				x: Math.random() * canvas.width,
+				y: Math.random() * canvas.height,
+				vx: (Math.random() - 0.5) * 1,
+				vy: (Math.random() - 0.5) * 1,
+				r: Math.random() * 2 + 1
+			});
+		}
+		
+		function draw() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			for (let p of particles) {
+				ctx.beginPath();
+				ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+				ctx.fillStyle = "#0ff";
+				ctx.fill();
+				
+				for (let q of particles) {
+					const dx = p.x - q.x;
+					const dy = p.y - q.y;
+					const dist = Math.sqrt(dx * dx + dy * dy);
+					if (dist < 100) {
+						ctx.beginPath();
+						ctx.moveTo(p.x, p.y);
+						ctx.lineTo(q.x, q.y);
+						ctx.strokeStyle = 'rgba(0,255,255,' + (1 - dist / 100) + ')';
+						ctx.lineWidth = 0.5;
+						ctx.stroke();
+					}
+				}
+				
+				p.x += p.vx;
+				p.y += p.vy;
+				if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+				if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+			}
+			requestAnimationFrame(draw);
+		}
+		
+		draw();
+		
+		window.addEventListener('resize', () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		});
+	</script>
+
+<!-- Firebase modules -->
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+
+</html>
